@@ -24,18 +24,22 @@
         </div>
         <div class="mb-6">
             <label for="phongbanUser" class="form-label">Phòng ban</label>
-            <select name="phongbanUser" >
+            <select name="phongbanUser">
                 @foreach ($phongban as $value)
                     <option value="{{ $value->id }}">{{ $value->ten_donvi }}</option>
                 @endforeach
             </select>
-            <div class="mb-6">
-                <label for="tuoiUsers" class="form-label">Tuổi</label>
-                <input type="text" id="tuoiUsers" name="tuoiUsers">
-            </div>
+        </div>
+        <div class="mb-6">
+            <label for="tuoiUsers" class="form-label">Tuổi</label>
+            <input type="text" id="tuoiUsers" name="tuoiUsers">
         </div>
         <button type="submit">Thêm mới</button>
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

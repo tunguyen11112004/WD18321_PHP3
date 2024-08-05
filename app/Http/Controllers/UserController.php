@@ -198,31 +198,46 @@ class UserController extends Controller
         return redirect()->route('users.listUsers');
     }
 
-    public function deleteUsers($idUser){
+    public function deleteUsers($idUser)
+    {
         DB::table('users')->where('id', $idUser)->delete();
         return redirect()->route('users.listUsers');
     }
 
     public function updateUsers($idUser)
     {
-        $update = DB::table('users')
-        ->where('users.id', $idUser)
-        ->join('phongban', 'phongban.id', '=', 'users.phongban_id')
-            ->select('users.id', 'users.name', 'users.email', 'users.phongban_id', 'phongban.ten_donvi', 'tuoi')
-            ->get();
+        $phongban = DB::table('phongban')->select('id', 'ten_donvi')->get();
+        $update = DB::table('users')->where('id', $idUser)->first();
         return view('users/updateUsers')->with([
-            'update' => $update
+            'update' => $update,
+            'phongban' => $phongban
+
         ]);
-        
-        
+
     }
 
-    public function updatePostUsers(Request $req, $idUser)
+    public function updatePostUsers(Request $req)
     {
-        
+        $data = [
+            'name' => $req->nameUsers,
+            'email' => $req->emailUsers,
+            'phongban_id' => $req->phongbanUser,
+            'songaynghi' => $req->songaynghiUser,
+            'tuoi' => $req->touiUsers,
+            'updated_at' => Carbon::now()
+        ];
+        DB::table('users')->wheres('users.id', $req->idUser)->insert($data);
+
+        return redirect()->route('users.listUsers');
     }
-        
+
+    public function test() 
+    {
+        return view('admin.products.list-product');
+    }
+
 }
 
 
- 
+
+

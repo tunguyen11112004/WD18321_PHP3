@@ -14,31 +14,44 @@
     <h3>Update Users</h3>
     <form action="{{ route('users.updatePostUsers') }}" method="post">
         @csrf
-        @foreach ($update as $value)
+        <input type="hidden" value="{{ $update->id }}" name="idUsers" id="">
+        <div class="mb-6">
+            <label for="nameUsers" class="form-label">Name</label>
+            <input type="text" id="nameUsers" name="nameUsers" value="{{ $update->name }}">
+        </div>
+        <div class="mb-6">
+            <label for="emailUsers" class="form-label">Email</label>
+            <input type="text" id="emailUsers" name="emailUsers" value="{{ $update->email }}">
+        </div>
+        <div class="mb-6">
+            <label for="phongbanUser" class="form-label">Phòng ban</label>
+            <select name="phongbanUser">
+                @foreach ($update as $value)
+                    
+                    <option
+                    @if ($update->phongban_id === $value->id)
+                        selected
+                    @endif
+                    value="{{ $value->id }}">{{ $value->ten_donvi }}</option>
+                @endforeach
+            </select>
             <div class="mb-6">
-                <label for="nameUsers" class="form-label">Name</label>
-                <input type="text" id="nameUsers" name="nameUsers" value="{{ $value->name }}">
+                <label for="songaynghiUser" class="form-label">Số ngày nghỉ</label>
+                <input type="text" id="songaynghiUser" name="songaynghiUser" value="{{ $update->songaynghi }}">
             </div>
             <div class="mb-6">
-                <label for="emailUsers" class="form-label">Email</label>
-                <input type="text" id="emailUsers" name="emailUsers" value="{{ $value->email }}">
+                <label for="tuoiUsers" class="form-label">Tuổi</label>
+                <input type="text" id="tuoiUsers" name="tuoiUsers" value="{{ $update->tuoi }}">
             </div>
-            <div class="mb-6">
-                <label for="phongbanUser" class="form-label">Phòng ban</label>
-                <select name="phongbanUser">
-                    <option value="{{ $value->id }}">{{ $value->ten_donvi }}</option>
-                    <option value="1">Ban giám hiệu</option>
-                    <option value="2">Ban đào tạo</option>
-                    <option value="3">Ban phát triển chương trình</option>
-                </select>
-                <div class="mb-6">
-                    <label for="tuoiUsers" class="form-label">Tuổi</label>
-                    <input type="text" id="tuoiUsers" name="tuoiUsers" value="{{ $value->tuoi }}">
-                </div>
-            </div>
-        @endforeach
+        </div>
         <button type="submit" class="btn btn success">Cập nhật</button>
     </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
 </body>
 
 </html>
